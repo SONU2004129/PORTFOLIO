@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="name" placeholder="Name">
+
+<button onclick="sendData()">
+Send
+</button>
+
+<script>
+
+async function sendData() {
+
+    const name =
+        document.getElementById("name").value;
+
+    const response =
+        await fetch(
+            "http://localhost:3000/contact",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name
+                })
+            }
+        );
+
+    const data =
+        await response.json();
+
+    console.log(data);
+}
+
+</script>
+
+</body>
+</html>
