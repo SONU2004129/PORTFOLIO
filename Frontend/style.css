@@ -14,14 +14,14 @@
 
 /* ── Design Tokens ── */
 :root {
-    --bg:        #070810;
-    --surface:   #0e0f1c;
-    --surface2:  #141527;
-    --accent:    #00e5b0;
-    --accent2:   #7b5cf0;
-    --text:      #e8eaf6;
-    --muted:     #6b7280;
-    --border:    rgba(255, 255, 255, 0.07);
+    --bg: #070810;
+    --surface: #0e0f1c;
+    --surface2: #141527;
+    --accent: #00e5b0;
+    --accent2: #7b5cf0;
+    --text: #e8eaf6;
+    --muted: #6b7280;
+    --border: rgba(255, 255, 255, 0.07);
     --font-head: "Syne", sans-serif;
     --font-body: "Outfit", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
@@ -48,9 +48,13 @@ body {
    We restore the default cursor on touch-only devices.
 */
 @media (hover: none) {
-    body { cursor: auto; }
+    body {
+        cursor: auto;
+    }
     .cursor,
-    .cursor-ring { display: none; }
+    .cursor-ring {
+        display: none;
+    }
 }
 
 /* ── Custom cursor ── */
@@ -79,7 +83,10 @@ body {
     pointer-events: none;
     z-index: 9998;
     opacity: 0.5;
-    transition: transform 0.12s ease, width 0.2s, height 0.2s;
+    transition:
+        transform 0.12s ease,
+        width 0.2s,
+        height 0.2s;
 }
 
 /* ── NAV ── */
@@ -93,7 +100,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(180deg, rgba(7, 8, 16, 0.95) 0%, transparent 100%);
+    background: linear-gradient(
+        180deg,
+        rgba(7, 8, 16, 0.95) 0%,
+        transparent 100%
+    );
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--border);
@@ -141,8 +152,12 @@ nav {
     transition: transform 0.25s ease;
 }
 
-.nav-links a:hover { color: var(--accent); }
-.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:hover {
+    color: var(--accent);
+}
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
 
 /* ── Page dot indicators ── */
 .page-dots {
@@ -240,7 +255,11 @@ section::before {
 */
 .hero-name {
     font-family: var(--font-head);
-    font-size: clamp(2rem, 8vw, 7.5rem); /* FIXED: was clamp(3.5rem, 8vw, 7.5rem) */
+    font-size: clamp(
+        2rem,
+        8vw,
+        7.5rem
+    ); /* FIXED: was clamp(3.5rem, 8vw, 7.5rem) */
     font-weight: 800;
     line-height: 0.95;
     letter-spacing: -0.04em;
@@ -260,7 +279,9 @@ section::before {
     max-width: 100%; /* never wider than its parent */
 }
 
-.hero-name .accent { color: var(--accent); }
+.hero-name .accent {
+    color: var(--accent);
+}
 
 .hero-tagline {
     font-size: 1.15rem;
@@ -302,7 +323,9 @@ section::before {
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
     letter-spacing: 0.01em;
 
     /*
@@ -329,7 +352,9 @@ section::before {
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
+    transition:
+        border-color 0.2s,
+        color 0.2s;
     white-space: nowrap; /* CHANGE 7 continued */
 }
 
@@ -389,7 +414,9 @@ section::before {
 }
 
 /* ── ABOUT ── */
-#about { padding: 6rem 4rem; }
+#about {
+    padding: 6rem 4rem;
+}
 
 .about-grid {
     display: grid;
@@ -473,7 +500,9 @@ section::before {
     margin-bottom: 1rem;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
+    transition:
+        border-color 0.3s,
+        transform 0.3s;
 }
 
 .edu-card:hover {
@@ -559,7 +588,9 @@ section::before {
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.8rem;
-    transition: border-color 0.3s, transform 0.3s;
+    transition:
+        border-color 0.3s,
+        transform 0.3s;
 }
 
 .skill-category:hover {
@@ -607,7 +638,9 @@ section::before {
 }
 
 /* Certifications */
-.cert-label { margin-top: 2.5rem; }
+.cert-label {
+    margin-top: 2.5rem;
+}
 
 .cert-row {
     display: flex;
@@ -622,7 +655,9 @@ section::before {
     flex-wrap: wrap; /* CHANGE 10: cert row wraps on small screens */
 }
 
-.cert-row:hover { border-color: rgba(0, 229, 176, 0.3); }
+.cert-row:hover {
+    border-color: rgba(0, 229, 176, 0.3);
+}
 
 .cert-icon {
     width: 40px;
@@ -681,7 +716,9 @@ section::before {
     padding: 2rem;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s;
+    transition:
+        transform 0.3s,
+        border-color 0.3s;
     display: flex;
     flex-direction: column;
 }
@@ -694,14 +731,18 @@ section::before {
 .project-card::after {
     content: "";
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     opacity: 0;
     transition: opacity 0.3s;
 }
 
-.project-card:hover::after { opacity: 1; }
+.project-card:hover::after {
+    opacity: 1;
+}
 
 .project-num {
     font-family: var(--font-mono);
@@ -755,6 +796,22 @@ section::before {
     flex-wrap: wrap;
     margin-top: 1.5rem;
 }
+/* Live Demo Button */
+.project-demo-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    background: #0078ff;
+    transition: 0.3s ease;
+}
+
+.project-demo-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
 
 .tag {
     font-family: var(--font-mono);
@@ -789,7 +846,9 @@ section::before {
     flex-wrap: wrap; /* CHANGE 11: wrap on small screens */
 }
 
-.github-card-icon { font-size: 1.3rem; }
+.github-card-icon {
+    font-size: 1.3rem;
+}
 
 .github-card-title {
     font-size: 0.85rem;
@@ -843,7 +902,11 @@ section::before {
 */
 .contact-heading {
     font-family: var(--font-head);
-    font-size: clamp(1.8rem, 6vw, 4.5rem); /* FIXED: was clamp(2.5rem, 5vw, 4.5rem) */
+    font-size: clamp(
+        1.8rem,
+        6vw,
+        4.5rem
+    ); /* FIXED: was clamp(2.5rem, 5vw, 4.5rem) */
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.04em;
@@ -852,7 +915,9 @@ section::before {
     word-break: break-word;
 }
 
-.contact-heading .glow { color: var(--accent); }
+.contact-heading .glow {
+    color: var(--accent);
+}
 
 .contact-sub {
     font-size: 1rem;
@@ -944,7 +1009,9 @@ section::before {
     flex-shrink: 0; /* CHANGE 16: arrow must not shrink */
 }
 
-.contact-link:hover .link-arrow { color: var(--accent); }
+.contact-link:hover .link-arrow {
+    color: var(--accent);
+}
 
 .footer-line {
     margin-top: 4rem;
@@ -971,7 +1038,9 @@ section::before {
 .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
 }
 
 .reveal.visible {
@@ -980,9 +1049,16 @@ section::before {
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar       { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--surface2);
+    border-radius: 4px;
+}
 
 /* ================================================================
    RESPONSIVE BREAKPOINTS
@@ -994,7 +1070,6 @@ section::before {
    We've expanded it significantly below.
 */
 @media (max-width: 768px) {
-
     /* Nav: reduce padding so logo + links don't crowd each other */
     nav {
         padding: 1rem 1.5rem;
@@ -1127,7 +1202,6 @@ section::before {
    Extra care for phones like iPhone SE (375px) and older Androids (320px).
 */
 @media (max-width: 480px) {
-
     /*
        CHANGE 23: Nav links are too many (5 items) for a 320px screen.
        Hide the numbered nav links on very small phones.

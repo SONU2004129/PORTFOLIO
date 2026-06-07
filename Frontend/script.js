@@ -101,7 +101,23 @@ async function loadProjects() {
                     </div>
                     <h3 class="project-title">${project.title}</h3>
                     <div class="project-year">${project.tech}</div>
-                    <p class="project-desc">Project loaded from MongoDB database.</p>
+                    <p class="project-desc">
+    Project loaded from MongoDB database.
+</p>
+
+${
+    project.title === "Image Gallery Website"
+        ? `
+        <a
+            href="https://imgallery-web.vercel.app"
+            target="_blank"
+            class="project-demo-btn"
+        >
+            Live Demo →
+        </a>
+        `
+        : ""
+}
                     <div class="project-tags">
                         <span class="tag tag-lang">${project.tech}</span>
                     </div>
