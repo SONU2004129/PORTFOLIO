@@ -80,7 +80,7 @@ async function loadProjects() {
         const API_URL =
             location.hostname === "localhost" || location.protocol === "file:"
                 ? "http://localhost:3000"
-                : "https://portfolio-full-stack-m6cl.onrender.com";
+                : "https://portfolio-full-stack-xz6i.onrender.com";
 
         const response = await fetch(`${API_URL}/projects`);
 
