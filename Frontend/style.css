@@ -1,6 +1,6 @@
 /* ============================================================
    Meghnath Marndi — Portfolio
-   style.css  (extracted from portfolio.html)
+   style.css — Fully Responsive Version
    ============================================================ */
 
 /* ── Reset ── */
@@ -37,8 +37,20 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
-    overflow-x: hidden;
+    overflow-x: hidden; /* prevents horizontal scroll on mobile */
     cursor: none;
+}
+
+/*
+   CHANGE 1: Touch device cursor fix
+   On phones/tablets there is no mouse cursor.
+   "cursor: none" on body would confuse touch users.
+   We restore the default cursor on touch-only devices.
+*/
+@media (hover: none) {
+    body { cursor: auto; }
+    .cursor,
+    .cursor-ring { display: none; }
 }
 
 /* ── Custom cursor ── */
@@ -94,6 +106,8 @@ nav {
     color: var(--accent);
     letter-spacing: -0.02em;
     text-decoration: none;
+    /* CHANGE 2: prevent logo from shrinking and squashing on small nav */
+    flex-shrink: 0;
 }
 
 .nav-links {
@@ -127,13 +141,8 @@ nav {
     transition: transform 0.25s ease;
 }
 
-.nav-links a:hover {
-    color: var(--accent);
-}
-
-.nav-links a:hover::after {
-    transform: scaleX(1);
-}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { transform: scaleX(1); }
 
 /* ── Page dot indicators ── */
 .page-dots {
@@ -201,11 +210,37 @@ section::before {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUp 0.7s ease 0.3s forwards;
+
+    /*
+       CHANGE 3: eyebrow text can wrap on tiny screens.
+       Without this it may push outside its container.
+    */
+    word-break: break-word;
 }
 
+/*
+   CHANGE 4: THE MAIN FIX — hero name font size
+   ─────────────────────────────────────────────
+   ORIGINAL: clamp(3.5rem, 8vw, 7.5rem)
+     - Minimum was 3.5rem = 56px, which is still too wide on a 320px screen.
+     - "Meghnath" alone at 56px is wider than 320px.
+
+   FIXED:    clamp(2rem, 8vw, 7.5rem)
+     - Minimum is now 2rem = 32px. This safely fits on 320px screens.
+     - The middle value "8vw" scales naturally with viewport width.
+     - Maximum stays at 7.5rem so large desktops look identical to before.
+     - clamp(MIN, PREFERRED, MAX) — browser picks the preferred unless
+       it falls below MIN or above MAX.
+
+   How clamp works:
+     On 320px screen  → 8vw = 25.6px  → below 2rem (32px) → uses 2rem ✓
+     On 480px screen  → 8vw = 38.4px  → between 32–120px  → uses 38.4px ✓
+     On 768px screen  → 8vw = 61.4px  → between 32–120px  → uses 61.4px ✓
+     On 1440px screen → 8vw = 115px   → below 7.5rem (120px) → uses 115px ✓
+*/
 .hero-name {
     font-family: var(--font-head);
-    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    font-size: clamp(2rem, 8vw, 7.5rem); /* FIXED: was clamp(3.5rem, 8vw, 7.5rem) */
     font-weight: 800;
     line-height: 0.95;
     letter-spacing: -0.04em;
@@ -214,11 +249,18 @@ section::before {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeUp 0.8s ease 0.5s forwards;
+
+    /*
+       CHANGE 5: Prevent the name from overflowing its container.
+       "overflow-wrap: break-word" makes the browser wrap the word
+       to a new line rather than letting it escape the screen edges.
+    */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%; /* never wider than its parent */
 }
 
-.hero-name .accent {
-    color: var(--accent);
-}
+.hero-name .accent { color: var(--accent); }
 
 .hero-tagline {
     font-size: 1.15rem;
@@ -231,12 +273,19 @@ section::before {
     opacity: 0;
     transform: translateY(30px);
     animation: fadeUp 0.8s ease 0.7s forwards;
+
+    /*
+       CHANGE 6: On small screens, max-width: 520px is fine
+       but the font size should scale down slightly.
+       We use clamp() to gently reduce it on very small screens.
+    */
+    font-size: clamp(0.9rem, 3vw, 1.15rem); /* FIXED */
 }
 
 .hero-cta {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* already had this — good */
     opacity: 0;
     transform: translateY(30px);
     animation: fadeUp 0.8s ease 0.9s forwards;
@@ -255,6 +304,13 @@ section::before {
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
     letter-spacing: 0.01em;
+
+    /*
+       CHANGE 7: Buttons should not shrink awkwardly on small screens.
+       They already flex-wrap, but adding a min-width prevents
+       a button from becoming too narrow to read.
+    */
+    white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -274,6 +330,7 @@ section::before {
     cursor: pointer;
     text-decoration: none;
     transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap; /* CHANGE 7 continued */
 }
 
 .btn-outline:hover {
@@ -332,9 +389,7 @@ section::before {
 }
 
 /* ── ABOUT ── */
-#about {
-    padding: 6rem 4rem;
-}
+#about { padding: 6rem 4rem; }
 
 .about-grid {
     display: grid;
@@ -354,14 +409,25 @@ section::before {
     margin-bottom: 1rem;
 }
 
+/*
+   CHANGE 8: Section title minimum font size
+   ORIGINAL: clamp(2rem, 4vw, 3rem)
+     - 2rem = 32px minimum, looks fine on most screens.
+     - But on 320px phone, 4vw = 12.8px which is below 2rem, so 2rem kicks in.
+     - 2rem on 320px is still okay, but we add word-break safety.
+
+   We keep the clamp() but add overflow safety properties below.
+*/
 .section-title {
     font-family: var(--font-head);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 4vw, 3rem); /* FIXED: was 2rem minimum */
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.03em;
     color: var(--text);
     margin-bottom: 1.5rem;
+    overflow-wrap: break-word; /* CHANGE 8: safety net for long words */
+    word-break: break-word;
 }
 
 .about-text {
@@ -443,6 +509,7 @@ section::before {
     display: flex;
     gap: 1rem;
     margin-top: 0.5rem;
+    flex-wrap: wrap; /* CHANGE 9: badges can wrap if space is tight */
 }
 
 .edu-badge {
@@ -540,9 +607,7 @@ section::before {
 }
 
 /* Certifications */
-.cert-label {
-    margin-top: 2.5rem;
-}
+.cert-label { margin-top: 2.5rem; }
 
 .cert-row {
     display: flex;
@@ -554,11 +619,10 @@ section::before {
     border-radius: 10px;
     margin-top: 1.5rem;
     transition: border-color 0.3s;
+    flex-wrap: wrap; /* CHANGE 10: cert row wraps on small screens */
 }
 
-.cert-row:hover {
-    border-color: rgba(0, 229, 176, 0.3);
-}
+.cert-row:hover { border-color: rgba(0, 229, 176, 0.3); }
 
 .cert-icon {
     width: 40px;
@@ -630,18 +694,14 @@ section::before {
 .project-card::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     opacity: 0;
     transition: opacity 0.3s;
 }
 
-.project-card:hover::after {
-    opacity: 1;
-}
+.project-card:hover::after { opacity: 1; }
 
 .project-num {
     font-family: var(--font-mono);
@@ -716,7 +776,7 @@ section::before {
     border: 1px solid rgba(123, 92, 240, 0.2);
 }
 
-/* GitHub card (replaces the projects section inline-style div) */
+/* GitHub card */
 .github-card {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -726,11 +786,10 @@ section::before {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap; /* CHANGE 11: wrap on small screens */
 }
 
-.github-card-icon {
-    font-size: 1.3rem;
-}
+.github-card-icon { font-size: 1.3rem; }
 
 .github-card-title {
     font-size: 0.85rem;
@@ -742,6 +801,13 @@ section::before {
     font-size: 0.78rem;
     color: var(--muted);
     margin-top: 0.2rem;
+
+    /*
+       CHANGE 12: Long URLs like "github.com/SONU2004129" can overflow
+       on narrow screens. overflow-wrap forces them to wrap.
+    */
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .github-card-link {
@@ -764,18 +830,29 @@ section::before {
     max-width: 800px;
 }
 
+/*
+   CHANGE 13: contact heading font size
+   ORIGINAL: clamp(2.5rem, 5vw, 4.5rem)
+     - 2.5rem = 40px minimum — too large for 320px screens.
+     - "Let's work" at 40px + "together." at 40px can overflow on small phones.
+
+   FIXED: clamp(1.8rem, 6vw, 4.5rem)
+     - 1.8rem = ~29px minimum — fits well on 320px.
+     - 6vw preferred — slightly faster scaling so it looks good mid-range.
+     - 4.5rem max — desktop stays unchanged.
+*/
 .contact-heading {
     font-family: var(--font-head);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(1.8rem, 6vw, 4.5rem); /* FIXED: was clamp(2.5rem, 5vw, 4.5rem) */
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.04em;
     margin-bottom: 1.5rem;
+    overflow-wrap: break-word; /* CHANGE 13 continued */
+    word-break: break-word;
 }
 
-.contact-heading .glow {
-    color: var(--accent);
-}
+.contact-heading .glow { color: var(--accent); }
 
 .contact-sub {
     font-size: 1rem;
@@ -803,6 +880,12 @@ section::before {
     transition: all 0.25s;
     position: relative;
     overflow: hidden;
+    /*
+       CHANGE 14: contact cards had no overflow protection.
+       Email addresses and URLs are long — they can break layouts.
+       min-width: 0 allows flex children to shrink below content size.
+    */
+    min-width: 0;
 }
 
 .contact-link:hover {
@@ -824,7 +907,6 @@ section::before {
     color: var(--accent);
 }
 
-/* LinkedIn "in" text icon */
 .link-icon-text {
     font-size: 0.85rem;
     font-weight: 700;
@@ -845,6 +927,13 @@ section::before {
     color: var(--text);
     margin-top: 0.15rem;
     font-weight: 500;
+
+    /*
+       CHANGE 15: email/LinkedIn/GitHub values are long strings.
+       Without these, they overflow their card on small phones.
+    */
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .link-arrow {
@@ -852,11 +941,10 @@ section::before {
     color: var(--muted);
     font-size: 1.2rem;
     transition: color 0.2s;
+    flex-shrink: 0; /* CHANGE 16: arrow must not shrink */
 }
 
-.contact-link:hover .link-arrow {
-    color: var(--accent);
-}
+.contact-link:hover .link-arrow { color: var(--accent); }
 
 .footer-line {
     margin-top: 4rem;
@@ -868,6 +956,8 @@ section::before {
     color: var(--muted);
     font-size: 0.8rem;
     font-family: var(--font-mono);
+    flex-wrap: wrap; /* CHANGE 17: footer text wraps on small screens */
+    gap: 0.5rem;
 }
 
 /* ── Animations ── */
@@ -894,29 +984,222 @@ section::before {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
 
-/* ── Responsive ── */
+/* ================================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================================ */
+
+/*
+   BREAKPOINT 1: Tablets and large phones (max 768px)
+   Original file had this but was missing several fixes.
+   We've expanded it significantly below.
+*/
 @media (max-width: 768px) {
+
+    /* Nav: reduce padding so logo + links don't crowd each other */
     nav {
         padding: 1rem 1.5rem;
     }
+
+    /* CHANGE 18: nav links reduce gap on tablets */
+    .nav-links {
+        gap: 1rem;
+    }
+
+    /* All sections get tighter horizontal padding on mobile */
     section {
         padding: 5rem 1.5rem 3rem;
     }
+
+    /* #home needs extra top padding because of fixed nav */
+    #home {
+        padding-top: 7rem;
+    }
+
+    /* About section padding consistent with other sections */
+    #about {
+        padding: 5rem 1.5rem;
+    }
+
+    /* Collapse 2-column grids to 1-column on mobile */
     .about-grid,
     .skills-cats,
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: 2rem; /* CHANGE 19: reduce gap on 1-column layout */
     }
+
+    /* About grid column gap was 5rem — too much for mobile */
+    .about-grid {
+        gap: 3rem;
+    }
+
+    /*
+       CHANGE 20: hero-stats
+       On mobile, position:absolute is removed (it was overlapping content).
+       We move it into the normal document flow below the CTA buttons.
+    */
     .hero-stats {
         position: static;
         margin-top: 3rem;
         flex-wrap: wrap;
         gap: 2rem;
     }
+
+    /* Reduce stat number size slightly on mobile */
+    .stat-val {
+        font-size: 1.8rem;
+    }
+
+    /* Page dots are hidden — too small to tap on mobile */
     .page-dots {
         display: none;
     }
+
+    /*
+       CHANGE 21: orbs are very large (400-500px) and can cause
+       horizontal overflow on small screens. Scale them down.
+    */
+    .orb1 {
+        width: 250px;
+        height: 250px;
+    }
+    .orb2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    /* About detail cards: collapse to 1 column on small phones */
+    .about-details {
+        grid-template-columns: 1fr;
+    }
+
+    /* Skill category cards: reduce padding on mobile */
+    .skill-category {
+        padding: 1.4rem;
+    }
+
+    /*
+       CHANGE 22: cert-row on mobile
+       The cert date ("April 2025") was pushed to margin-left: auto,
+       which on tiny screens forces content to overflow.
+       We allow it to wrap below the cert name.
+    */
+    .cert-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .cert-date {
+        margin-left: 0; /* reset auto margin when stacked */
+    }
+
+    /* Contact cards: disable the translateX hover on mobile (too wide) */
+    .contact-link:hover {
+        transform: none;
+    }
+
+    /* Footer: stack on small screens */
+    .footer-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    /* Project cards: reduce padding on mobile */
+    .project-card {
+        padding: 1.5rem;
+    }
+
+    /* GitHub card: stack on mobile */
+    .github-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .github-card-link {
+        margin-left: 0;
+    }
+}
+
+/*
+   BREAKPOINT 2: Small phones (max 480px)
+   Extra care for phones like iPhone SE (375px) and older Androids (320px).
+*/
+@media (max-width: 480px) {
+
+    /*
+       CHANGE 23: Nav links are too many (5 items) for a 320px screen.
+       Hide the numbered nav links on very small phones.
+       The user can still scroll through sections normally.
+       If you add a hamburger menu later, remove this rule.
+    */
     .nav-links {
-        gap: 1.2rem;
+        display: none;
+    }
+
+    /* More breathing room for section content */
+    section {
+        padding: 4.5rem 1.2rem 2.5rem;
+    }
+
+    #home {
+        padding-top: 6rem;
+    }
+
+    /* hero eyebrow text: reduce letter-spacing so it fits */
+    .hero-eyebrow {
+        letter-spacing: 0.1em;
+        font-size: 0.68rem;
+    }
+
+    /*
+       CHANGE 24: On 320px, even clamp(2rem, 8vw, 7.5rem) gives 2rem = 32px.
+       "Meghnath" in Syne Bold at 32px is approximately 200px wide — fits 320px.
+       But "Marndi." (with the accent span) on the second line needs similar care.
+       We leave the clamp() as the main fix, but reduce letter-spacing
+       to gain extra space on the narrowest screens.
+    */
+    .hero-name {
+        letter-spacing: -0.02em;
+    }
+
+    /* Tagline: tighten it up on small phones */
+    .hero-tagline {
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    /* CTA buttons: full width on tiny screens for easy tapping */
+    .hero-cta {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-outline {
+        width: 100%;
+        text-align: center;
+        padding: 0.9rem 1.5rem;
+    }
+
+    /* Stats: 3 columns is too tight — stack them */
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    /* Section titles: tighten letter-spacing on tiny screens */
+    .section-title {
+        letter-spacing: -0.02em;
+    }
+
+    /* Contact link values: reduce font size to prevent overflow */
+    .link-value {
+        font-size: 0.78rem;
+    }
+
+    /* Contact heading: reduce letter-spacing on tiny screens */
+    .contact-heading {
+        letter-spacing: -0.02em;
     }
 }
