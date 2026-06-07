@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Meghnath Marndi — Portfolio</title>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+
+        <!-- Custom cursor -->
+        <div class="cursor" id="cursor"></div>
+        <div class="cursor-ring" id="cursorRing"></div>
+
+        <!-- ===================== NAV ===================== -->
+        <nav>
+            <a href="#home" class="nav-logo">MM_</a>
+            <ul class="nav-links">
+                <li><a href="#home">01 Home</a></li>
+                <li><a href="#about">02 About</a></li>
+                <li><a href="#skills">03 Skills</a></li>
+                <li><a href="#projects">04 Projects</a></li>
+                <li><a href="#contact">05 Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- ===================== PAGE DOTS ===================== -->
+        <div class="page-dots" id="pageDots">
+            <div class="dot active" onclick="scrollToSection('home')"    title="Home"></div>
+            <div class="dot"        onclick="scrollToSection('about')"   title="About"></div>
+            <div class="dot"        onclick="scrollToSection('skills')"  title="Skills"></div>
+            <div class="dot"        onclick="scrollToSection('projects')" title="Projects"></div>
+            <div class="dot"        onclick="scrollToSection('contact')" title="Contact"></div>
+        </div>
+
+        <!-- ===================== PAGE 1 · HERO ===================== -->
+        <section id="home">
+            <div class="orb orb1"></div>
+            <div class="orb orb2"></div>
+
+            <div class="hero-eyebrow">
+                ✦ B.Tech CSE Student · Amity University Jharkhand
+            </div>
+            <h1 class="hero-name">
+                Meghnath<br /><span class="accent">Marndi.</span>
+            </h1>
+            <p class="hero-tagline">
+                Crafting user-friendly applications &amp; solving complex problems
+                through clean, purposeful code. Passionate about OOP, web
+                technologies, and distributed systems.
+            </p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn-primary">View Projects</a>
+                <a href="#contact"  class="btn-outline">Get In Touch</a>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-val">2+</div>
+                    <div class="stat-label">Projects Built</div>
+                </div>
+                <div>
+                    <div class="stat-val">3+</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+                <div>
+                    <div class="stat-val">2025</div>
+                    <div class="stat-label">Active Since</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== PAGE 2 · ABOUT ===================== -->
+        <section id="about">
+            <div class="about-grid">
+
+                <!-- Left column: text + detail cards -->
+                <div>
+                    <div class="section-label reveal">02 / About me</div>
+                    <h2 class="section-title reveal">
+                        Building the future,<br />one line at a time.
+                    </h2>
+                    <p class="about-text reveal">
+                        I'm a motivated Computer Science Engineering student at
+                        Amity University Jharkhand with a strong foundation in
+                        Object-Oriented Programming and Web Technologies.
+                    </p>
+                    <p class="about-text reveal">
+                        I love building real-world applications — from hospital
+                        systems managing patient records to distributed
+                        peer-to-peer networks. I'm always eager to take on new
+                        technical challenges.
+                    </p>
+                    <div class="about-details reveal">
+                        <div class="detail-item">
+                            <div class="detail-key">Location</div>
+                            <div class="detail-val">Varanasi, UP, India</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-key">Degree</div>
+                            <div class="detail-val">B.Tech CSE</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-key">Current CGPA</div>
+                            <div class="detail-val">6.88</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-key">Expected Grad</div>
+                            <div class="detail-val">2027</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right column: education cards -->
+                <div class="reveal">
+                    <div class="section-label">Education</div>
+
+                    <div class="edu-card">
+                        <div class="edu-degree">B.Tech Computer Science Engineering</div>
+                        <div class="edu-school">Amity University Jharkhand</div>
+                        <div class="edu-meta">
+                            <span class="edu-badge badge-year">2023 – 2027</span>
+                            <span class="edu-badge badge-score">6.88 CGPA</span>
+                        </div>
+                    </div>
+
+                    <div class="edu-card">
+                        <div class="edu-degree">Class XII · Senior Secondary</div>
+                        <div class="edu-school">Navneeta Kunwar Public School · CBSE</div>
+                        <div class="edu-meta">
+                            <span class="edu-badge badge-year">2023</span>
+                            <span class="edu-badge badge-score">64.4%</span>
+                        </div>
+                    </div>
+
+                    <div class="edu-card">
+                        <div class="edu-degree">Class X · Secondary</div>
+                        <div class="edu-school">Navneeta Kunwar Public School · CBSE</div>
+                        <div class="edu-meta">
+                            <span class="edu-badge badge-year">2021</span>
+                            <span class="edu-badge badge-score">77%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================== PAGE 3 · SKILLS ===================== -->
+        <section id="skills">
+            <div class="skills-wrap">
+
+                <div class="skills-header">
+                    <div>
+                        <div class="section-label reveal">03 / Skills &amp; Tools</div>
+                        <h2 class="section-title reveal">
+                            Tech stack &amp;<br />capabilities.
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="skills-cats">
+                    <div class="skill-category reveal">
+                        <div class="cat-icon">⟨/⟩</div>
+                        <div class="cat-title">Programming Languages</div>
+                        <div class="skill-chips">
+                            <span class="chip">Java</span>
+                            <span class="chip">Python</span>
+                            <span class="chip">C</span>
+                            <span class="chip">C++</span>
+                            <span class="chip">SQL</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">Go (Golang)</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category reveal">
+                        <div class="cat-icon">◈</div>
+                        <div class="cat-title">Web Technologies</div>
+                        <div class="skill-chips">
+                            <span class="chip">HTML5</span>
+                            <span class="chip">CSS3</span>
+                            <span class="chip">React.js</span>
+                            <span class="chip">Bootstrap</span>
+                            <span class="chip">Node.js</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category reveal">
+                        <div class="cat-icon">⚙</div>
+                        <div class="cat-title">Tools &amp; Platforms</div>
+                        <div class="skill-chips">
+                            <span class="chip">Git</span>
+                            <span class="chip">GitHub</span>
+                            <span class="chip">VS Code</span>
+                            <span class="chip">MySQL</span>
+                            <span class="chip">IntelliJ IDEA</span>
+                            <span class="chip">Eclipse</span>
+                            <span class="chip">GoLand</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category reveal">
+                        <div class="cat-icon">◎</div>
+                        <div class="cat-title">Soft Skills</div>
+                        <div class="skill-chips">
+                            <span class="chip">Time Management</span>
+                            <span class="chip">Communication</span>
+                            <span class="chip">Teamwork</span>
+                            <span class="chip">Critical Thinking</span>
+                            <span class="chip">Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification -->
+                <div class="reveal">
+                    <div class="section-label cert-label">Certifications</div>
+                    <div class="cert-row">
+                        <div class="cert-icon">🏆</div>
+                        <div>
+                            <div class="cert-name">Fundamentals of Object-Oriented Programming</div>
+                            <div class="cert-org">NPTEL · IIT Roorkee</div>
+                        </div>
+                        <div class="cert-date">April 2025</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================== PAGE 4 · PROJECTS ===================== -->
+        <section id="projects">
+            <div class="projects-wrap">
+                <div class="section-label reveal">04 / Projects</div>
+                <h2 class="section-title reveal">
+                    Things I've<br />built recently.
+                </h2>
+
+                <!-- Cards injected by script.js via API -->
+                <div class="projects-grid" id="projectsGrid"></div>
+
+                <!-- GitHub link card -->
+                <div class="github-card reveal">
+                    <span class="github-card-icon">🔗</span>
+                    <div>
+                        <div class="github-card-title">Explore all projects on GitHub</div>
+                        <div class="github-card-sub">github.com/SONU2004129</div>
+                    </div>
+                    <a
+                        href="https://github.com/SONU2004129"
+                        target="_blank"
+                        class="github-card-link"
+                    >View →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== PAGE 5 · CONTACT ===================== -->
+        <section id="contact">
+            <div class="contact-wrap">
+                <div class="section-label reveal">05 / Contact</div>
+                <h2 class="contact-heading reveal">
+                    Let's work<br /><span class="glow">together.</span>
+                </h2>
+                <p class="contact-sub reveal">
+                    I'm open to internships, collaborations, and exciting
+                    projects. Don't hesitate to reach out!
+                </p>
+
+                <div class="contact-links reveal">
+                    <a href="mailto:Meghnathmarndi@gmail.com" class="contact-link">
+                        <div class="link-icon">✉</div>
+                        <div>
+                            <div class="link-label">Email</div>
+                            <div class="link-value">Meghnathmarndi@gmail.com</div>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+
+                    <a href="https://linkedin.com/in/meghnath-marndi" target="_blank" class="contact-link">
+                        <div class="link-icon link-icon-text">in</div>
+                        <div>
+                            <div class="link-label">LinkedIn</div>
+                            <div class="link-value">linkedin.com/in/meghnath-marndi</div>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+
+                    <a href="https://github.com/SONU2004129" target="_blank" class="contact-link">
+                        <div class="link-icon">⌥</div>
+                        <div>
+                            <div class="link-label">GitHub</div>
+                            <div class="link-value">github.com/SONU2004129</div>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+
+                    <a href="tel:+917991213068" class="contact-link">
+                        <div class="link-icon">☎</div>
+                        <div>
+                            <div class="link-label">Phone</div>
+                            <div class="link-value">+91 - 7991213068</div>
+                        </div>
+                        <div class="link-arrow">→</div>
+                    </a>
+                </div>
+
+                <div class="footer-line reveal">
+                    <span>© 2025 Meghnath Marndi</span>
+                    <span>Built with ♥ · Varanasi, India</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Script -->
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -5,77 +5,45 @@ require("dotenv").config();
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 // Home Route
 app.get("/", (req, res) => {
-    res.send("Task Manager Backend Running");
+    res.send("Portfolio Backend Running");
 });
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-    console.log("MongoDB Connected");
+mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB Connected");
 
-    app.listen(3000, () => {
-        console.log("Server running on port 3000");
+        app.listen(3000, () => {
+            console.log("Server running on port 3000");
+        });
+    })
+    .catch((err) => {
+        console.error("MongoDB Connection Error:", err);
     });
-})
-.catch(err => {
-    console.log("MongoDB Connection Error:");
-    console.log(err);
-});
 
-// Task Schema
-const taskSchema = new mongoose.Schema({
+// Project Schema
+const projectSchema = new mongoose.Schema({
     title: String,
-    description: String,
-    priority: String,
-    completed: {
-        type: Boolean,
-        default: false
-    }
+    tech: String,
 });
 
-// Task Model
-const Task = mongoose.model("Task", taskSchema);
+// Model
+const Project = mongoose.model("Project", projectSchema);
 
-// CREATE TASK
-app.post("/tasks", async (req, res) => {
+// GET ALL PROJECTS
+app.get("/projects", async (req, res) => {
     try {
-
-        const task = await Task.create({
-            title: req.body.title,
-            description: req.body.description,
-            priority: req.body.priority
-        });
-
-        res.status(201).json(task);
-
+        const projects = await Project.find();
+        res.json(projects);
     } catch (err) {
-
         res.status(500).json({
-            error: err.message
+            error: err.message,
         });
-
-    }
-});
-
-// GET ALL TASKS
-app.get("/tasks", async (req, res) => {
-    try {
-
-        const tasks = await Task.find();
-
-        res.json(tasks);
-
-    } catch (err) {
-
-        res.status(500).json({
-            error: err.message
-        });
-
     }
 });
