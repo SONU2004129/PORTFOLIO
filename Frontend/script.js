@@ -74,77 +74,119 @@ window.addEventListener("scroll", () => {
     });
 });
 
-/* ── Load projects from backend API ── */
-async function loadProjects() {
-    try {
-        const API_URL =
-            location.hostname === "localhost" || location.protocol === "file:"
-                ? "http://localhost:3000"
-                : "https://portfolio-full-stack-xz6i.onrender.com";
+/* ── Static projects data (no backend needed — instant load) ── */
+const PROJECTS = [
+    {
+        title: "AI Resume Builder",
+        tech: "HTML · CSS · JavaScript",
+        desc: "An AI-powered resume builder that generates professional resumes from user input. Features live preview, multiple templates, and one-click PDF export.",
+        demo: "https://resume-builder-psi-beryl.vercel.app/",
+        github: "https://github.com/SONU2004129/Resume-builder",
+    },
+    {
+        title: "Image Gallery Website",
+        tech: "HTML · CSS · JavaScript",
+        desc: "A responsive image gallery with dynamic filtering, lightbox preview, and smooth animations. Built with vanilla JS for zero-dependency fast performance.",
+        demo: "https://imgallery-web.vercel.app",
+        github: "https://github.com/SONU2004129/Resume-builder",
+    },
+    {
+        title: "Project Management App",
+        tech: "TypeScript · React · Node.js",
+        desc: "A full-featured project management dashboard for tracking tasks, milestones, and team progress. Built with TypeScript for type-safe, scalable architecture.",
+        demo: null,
+        github: "https://github.com/SONU2004129/PROJECT-MANAGEMENT",
+    },
+    {
+        title: "Blog Platform",
+        tech: "JavaScript · Node.js · Express",
+        desc: "A full-stack blogging platform where users can create, edit, and publish posts. Supports rich-text content, categories, and a clean reading experience.",
+        demo: null,
+        github: "https://github.com/SONU2004129/Blog-Platform",
+    },
+    {
+        title: "E-Commerce Website",
+        tech: "HTML · CSS · JavaScript",
+        desc: "A modern e-commerce storefront featuring product listings, shopping cart, and a responsive UI. Designed with clean aesthetics for an optimal shopping experience.",
+        demo: null,
+        github: "https://github.com/SONU2004129/E-commerce",
+    },
+    {
+        title: "P2P File Transfer System",
+        tech: "Go (Golang)",
+        desc: "A peer-to-peer file transfer system built in Go, enabling direct device-to-device file sharing over a local network without any central server.",
+        demo: null,
+        github: "https://github.com/SONU2004129/P2P-file-transfer-System-",
+    },
+    {
+        title: "Hospital Management System",
+        tech: "Java · OOP",
+        desc: "An object-oriented hospital management system for handling patient records, doctor appointments, and billing. Demonstrates strong OOP design principles in Java.",
+        demo: null,
+        github: "https://github.com/SONU2004129/Hospital-Management-System",
+    },
+    {
+        title: "Bank Management System",
+        tech: "C++",
+        desc: "A console-based banking application in C++ supporting account creation, deposits, withdrawals, and balance enquiry. Showcases file handling and OOP concepts.",
+        demo: null,
+        github: "https://github.com/SONU2004129/Bank-Management-System",
+    },
+    {
+        title: "Library Management System",
+        tech: "C++",
+        desc: "A C++ library management system to manage books, members, and issue/return records. Features search and data persistence via file handling.",
+        demo: null,
+        github: "https://github.com/SONU2004129/Library-Management-System",
+    },
+    {
+        title: "Student Management System",
+        tech: "C++",
+        desc: "A comprehensive student record management system in C++ that tracks student data, marks, and generates reports using object-oriented programming.",
+        demo: null,
+        github: "https://github.com/SONU2004129/Student-Management-System",
+    },
+    {
+        title: "Tic-Tac-Toe Game",
+        tech: "C++",
+        desc: "A classic two-player Tic-Tac-Toe game implemented in C++ with a clean console interface, game state tracking, and win/draw detection logic.",
+        demo: null,
+        github: "https://github.com/SONU2004129/Tic-Tack-Toe-game",
+    },
+];
 
-        const response = await fetch(`${API_URL}/projects`);
+function loadProjects() {
+    const grid = document.getElementById("projectsGrid");
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch projects");
-        }
+    let html = "";
 
-        const projects = await response.json();
-        const grid = document.getElementById("projectsGrid");
-
-        let html = "";
-
-        projects.forEach((project, index) => {
-            html += `
-                <div class="project-card">
-                    <div class="project-num">
-                        PROJECT ${String(index + 1).padStart(2, "0")}
-                    </div>
-                    <h3 class="project-title">${project.title}</h3>
-                    <div class="project-year">${project.tech}</div>
-                    <p class="project-desc">
-    Project loaded from MongoDB database.
-</p>
-
-${
-    project.title === "Image Gallery Website"
-        ? `
-        <a
-            href="https://imgallery-web.vercel.app"
-            target="_blank"
-            class="project-demo-btn"
-        >
-            Live Demo →
-        </a>
-        `
-        : project.title === "AI Resume Builder"
-          ? `
-        <a
-            href="https://resume-builder-psi-beryl.vercel.app/"
-            target="_blank"
-            class="project-demo-btn"
-        >
-            Live Demo →
-        </a>
-        `
-          : ""
-}
-                    <div class="project-tags">
-                        <span class="tag tag-lang">${project.tech}</span>
-                    </div>
-                </div>
-            `;
-        });
-
-        grid.innerHTML = html;
-    } catch (error) {
-        console.error("Error loading projects:", error);
-
-        document.getElementById("projectsGrid").innerHTML = `
+    PROJECTS.forEach((project, index) => {
+        html += `
             <div class="project-card">
-                <h3 class="project-title">Failed to load projects</h3>
+                <div class="project-num">
+                    PROJECT ${String(index + 1).padStart(2, "0")}
+                </div>
+                <h3 class="project-title">${project.title}</h3>
+                <div class="project-year">${project.tech}</div>
+                <p class="project-desc">${project.desc}</p>
+                <div class="project-btns">
+                    ${project.demo ? `
+                    <a href="${project.demo}" target="_blank" class="project-demo-btn">
+                        Live Demo →
+                    </a>` : ""}
+                    ${project.github ? `
+                    <a href="${project.github}" target="_blank" class="project-github-btn">
+                        GitHub ↗
+                    </a>` : ""}
+                </div>
+                <div class="project-tags">
+                    <span class="tag tag-lang">${project.tech}</span>
+                </div>
             </div>
         `;
-    }
+    });
+
+    grid.innerHTML = html;
 }
 
 loadProjects();
