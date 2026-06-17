@@ -116,7 +116,17 @@ ${
             Live Demo →
         </a>
         `
-        : ""
+        : project.title === "AI Resume Builder"
+          ? `
+        <a
+            href="https://resume-builder-psi-beryl.vercel.app/"
+            target="_blank"
+            class="project-demo-btn"
+        >
+            Live Demo →
+        </a>
+        `
+          : ""
 }
                     <div class="project-tags">
                         <span class="tag tag-lang">${project.tech}</span>
