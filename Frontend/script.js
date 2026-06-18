@@ -77,6 +77,13 @@ window.addEventListener("scroll", () => {
 /* ── Static projects data (no backend needed — instant load) ── */
 const PROJECTS = [
     {
+        title: "She Can Foundation",
+        tech: "React · TypeScript · Express.js · MongoDB Atlas",
+        desc: "A full-stack scholarship and mentorship platform featuring secure admin authentication, application management, MongoDB Atlas integration, status tracking, and cloud deployment using Vercel and Render.",
+        demo: "https://she-can-foundation-flame-one.vercel.app/",
+        github: "https://github.com/SONU2004129/She-Can-Foundation",
+    },
+    {
         title: "AI Resume Builder",
         tech: "HTML · CSS · JavaScript",
         desc: "An AI-powered resume builder that generates professional resumes from user input. Features live preview, multiple templates, and one-click PDF export.",
@@ -170,14 +177,22 @@ function loadProjects() {
                 <div class="project-year">${project.tech}</div>
                 <p class="project-desc">${project.desc}</p>
                 <div class="project-btns">
-                    ${project.demo ? `
+                    ${
+                        project.demo
+                            ? `
                     <a href="${project.demo}" target="_blank" class="project-demo-btn">
                         Live Demo →
-                    </a>` : ""}
-                    ${project.github ? `
+                    </a>`
+                            : ""
+                    }
+                    ${
+                        project.github
+                            ? `
                     <a href="${project.github}" target="_blank" class="project-github-btn">
                         GitHub ↗
-                    </a>` : ""}
+                    </a>`
+                            : ""
+                    }
                 </div>
                 <div class="project-tags">
                     <span class="tag tag-lang">${project.tech}</span>
