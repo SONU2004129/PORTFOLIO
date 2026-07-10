@@ -77,6 +77,13 @@ window.addEventListener("scroll", () => {
 /* ── Static projects data (no backend needed — instant load) ── */
 const PROJECTS = [
     {
+        title: "MeghShare",
+        tech: "React · Express.js · Node.js · MongoDB Atlas · Vercel Blob · Vercel",
+        desc: "A full-stack file sharing platform that enables secure file uploads and instant sharing through unique links. Features cloud storage with Vercel Blob, MongoDB Atlas integration for metadata management, drag-and-drop uploads, automatic file expiration, and a responsive user interface deployed on Vercel.",
+        demo: "https://megh-share.vercel.app/",
+        github: "https://github.com/SONU2004129/MeghShare",
+    },
+    {
         title: "She Can Foundation",
         tech: "React · TypeScript · Express.js · MongoDB Atlas",
         desc: "A full-stack scholarship and mentorship platform featuring secure admin authentication, application management, MongoDB Atlas integration, status tracking, and cloud deployment using Vercel and Render.",
